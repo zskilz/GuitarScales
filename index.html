@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script src="guitarScales.js"></script>
+        <script>
+            $(document).ready(guitarScales.init());
+        </script>
+    </head>
+    
+    <body>
+        <style>
+            #diag1 {
+                /*position: relative;*/
+                border: black 1px solid;
+                margin: 3px;
+                display: block;
+            }
+        </style>
+        <div>Hi there. While I'm making my way back to HTML5 game dev, I thought I'd
+            share some work I did on musical theory. This is a small interactive HTML5
+            Canvas guitar scales generator written in JavaScript. For standard guitar
+            set-up, the Tuning Base Note should be set to "E" and the tuning to "Standard".
+            The scales wrap around, so the pattern doesn't often start on the BaseNote/Key/Root.
+            It basically shows you all notes on the guitar that exist within the chosen
+            scale. As a exercise, guitarists familiar with bar-chords will can try
+            find the three major chords, the three minor chords and the one diminished
+            chord existing within the E major scale.</div>
+    </body>
+
+</html>
