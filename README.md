@@ -1,6 +1,6 @@
 # GuitarScales
 
-Code from blog post moved to github.
+Code from blog post (http://zskilz.blogspot.com/2013/03/guitar-scales-interactive.html) moved to github.
 
 ### Dependencies
 
@@ -19,4 +19,5 @@ Currently creates a object called 'guitarScales' from which you call the 'init' 
         $(document).ready(guitarScales.init());
     </script>
     
-It will append the guitarScales component to the body unless a jQuery selector is specified. Multiple instances not supported, so make sure your container selector returns one object.
+It will append the guitarScales component to the body unless a jQuery selector is specified (eg.`guitarScales.init('#myContainer')`). 
+Multiple instances not supported, so make sure your container selector returns one object.
