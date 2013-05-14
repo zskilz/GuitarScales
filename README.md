@@ -2,11 +2,11 @@
 
 Code from blog post moved to github.
 
-# Dependencies
+### Dependencies
 
 jQuery
 
-# Usage
+### Usage
 
 Include jQuery and guitarScales.js in your html.
 
