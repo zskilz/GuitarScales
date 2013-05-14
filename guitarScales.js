@@ -21,7 +21,7 @@ var guitarScales = {
     </footer>\
 </div>\
 ',
-    init: function() {
+    init: function(domElementStr) {
         var SciNotes = ["A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"];
 
         var Scales = {
@@ -101,7 +101,7 @@ var guitarScales = {
                 }
             }
             var _drawPos = function(cnxt) {
-                for (var y, t, i = 0; i < 6; i++) {
+                for (var r, y, t, i = 0; i < 6; i++) {
                     r = (i / 5);
 
                     y = h * r;
@@ -119,6 +119,7 @@ var guitarScales = {
                             cnxt.beginPath();
                             cnxt.arc(offset + x, offset + y, markWidth / 2, 0, 2 * Math.PI);
                             cnxt.stroke();
+                            if(n===0)cnxt.fill();
                         }
                     }
                 }
@@ -140,11 +141,11 @@ var guitarScales = {
             //update using globals
             drawNeck($("#diag1"), scale, tuning, handedness, baseNote, tuningBase, flip);
         }
-        
+
         // The "real" starting point...
         return function() {
             //add the html...
-            $('body').append(guitarScales.html);
+            $(typeof(domElementStr) === 'undefined' ? 'body' : domElementStr).append(guitarScales.html);
 
             //controls and handlers...
             var baseNoteSelect = $('<select id="baseNoteSelect"/>');
@@ -202,6 +203,6 @@ var guitarScales = {
             //1st update.
             updateScale();
         }
-        
+
     }
 };
