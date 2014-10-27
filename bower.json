@@ -1,0 +1,27 @@
+{
+  "name": "GuitarScales",
+  "version": "0.2.1",
+  "homepage": "https://github.com/zskilz/GuitarScales",
+  "authors": [
+    "zskilz <zskilz@gmail.com>"
+  ],
+  "description": "Interactive guitar neck.",
+  "main": "app/main.js",
+  "dependencies" : {
+    "angular" : "*",
+    "requirejs" : "*"
+  },
+  "moduleType": [
+    "amd"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "app/components",
+    "test",
+    "tests"
+  ]
+}

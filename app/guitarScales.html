@@ -1,0 +1,65 @@
+<div>
+    <style>
+      #theCanvas{
+          /*position: relative;*/
+          border: black 1px solid;
+          margin: 3px;
+          display: block;
+        }
+        .scaleCntrl {
+          display: inline-block;
+          border: black 1px solid;
+          margin: 2px;
+          padding: 2px;
+        }
+    </style>
+    <header>
+        <h1>Guitar scales</h1>
+    </header>
+    
+    Presets:
+      
+    <span ng-repeat="(presetName,preset) in presets">
+      <button ng-click="setScales(preset)">{{presetName}}</button>
+    </span>
+<hr/>
+    <span>
+      <button ng-click="addScale()" ng-disabled="currentScales.length>=4">Add Scale</button>
+      Transpose:
+      <button ng-click="transpose(1)">+</button>
+      <button ng-click="transpose(-1)">-</button>
+    </span>
+    <div>
+      <div class="scaleCntrl" ng-repeat="s in currentScales">
+
+        <div style="color: {{scaleColors[currentScales.indexOf(s)]}}">BaseNote/Key/Root:
+          <select ng-model="s.baseNote" ng-options="noteName as noteName for noteName in noteNames"></select>
+        </div>
+        <div>Scale:
+           <select ng-model="s.scale" ng-options="sc as sc for (sc,intvls) in scales"></select>
+
+        </div>
+        <span><button ng-click="removeScale(s)">Remove</button><button ng-click="s.hide=!s.hide">{{s.hide?"Show":"Hide"}}</button></span>
+
+      </div>
+    </div>
+
+
+    <div>Handedness:
+        <select ng-model="handedness">
+            <option>right</option>
+            <option>left</option>
+        </select>
+    </div>
+    <div>Tuning:
+     <select ng-model="tuning" ng-options="t as t for (t,intvls) in tunings"></select>
+    </div>
+    <div>Tuning Base Note:   
+      <select ng-model="tuningBase" ng-options="noteName as noteName for noteName in noteNames"></select>
+    </div>
+    <button ng-click="flip=!flip">Flip</button>
+    <canvas id="theCanvas"></canvas>
+    <footer>
+        <p>&copy; Copyright by Petrus J. Pretorius. All rights reserved.</p>
+    </footer>
+</div>

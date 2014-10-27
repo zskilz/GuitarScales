@@ -1,0 +1,23 @@
+{
+  "name": "GuitarScales",
+  "version": "0.2.1",
+  "description": "An interactive guitar neck.",
+  "author": "Zskilz <zskilz@gmail.com>",
+  "bin": {
+    "module-name": "./bin/GuitarScales.js"
+  },  
+  "main": "lib/foo.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zskilz/GuitarScales"
+  },
+  "bugs": {
+    "url": "https://github.com/zskilz/GuitarScales/issues"
+  },
+  "devDependencies": {
+    "bower": "*"
+  },
+  "private": ture,
+  "license": "MIT"
+}
+  
