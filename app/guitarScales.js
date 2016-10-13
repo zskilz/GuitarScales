@@ -174,8 +174,8 @@ define(['app'], function(app) {
     _drawFrets(cnxt);
     _drawStrings(cnxt);
     for (var i in scales) {
-       cnxt.setStrokeColor(scaleColors[i%4]);
-       cnxt.setFillColor(scaleColors[i%4]); 
+       cnxt.strokeStyle=(scaleColors[i%4]);
+       cnxt.fillStyle=(scaleColors[i%4]); 
       _drawPos(cnxt, i);
     }
   
