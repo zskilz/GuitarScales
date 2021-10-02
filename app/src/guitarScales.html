@@ -1,4 +1,4 @@
-<div>
+<template>
     <style>
       #theCanvas{
           /*position: relative;*/
@@ -19,8 +19,10 @@
     
     Presets:
       
-    <span ng-repeat="(presetName,preset) in presets">
-      <button ng-click="setScales(preset)">{{presetName}}</button>
+    <span>
+     <!-- ng-repeat="(presetName,preset) in presets"> -->
+     <slot name="presets"></slot>
+      <!-- <button ng-click="setScales(preset)">{{presetName}}</button> -->
     </span>
 <hr/>
     <span>
@@ -62,4 +64,4 @@
     <footer>
         <p>&copy; Copyright by Petrus J. Pretorius. All rights reserved.</p>
     </footer>
-</div>
+</template>
