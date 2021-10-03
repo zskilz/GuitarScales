@@ -1,8 +1,9 @@
 
 
 
-export const noteNames = ["A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"]
-    , handedness = ['left', 'right']
+export const noteNames = ["A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"] as const
+    , handedness = ['left', 'right'] as const
+
 export type tNoteNames = typeof noteNames[number]
 export type tTunings = keyof typeof tunings
 export type tScales = keyof typeof commonScales
@@ -14,7 +15,7 @@ export type tSettings = {
     flip: boolean
 }
 export type tScale = {
-    baseNote: string,
+    baseNote: tNoteNames,
     scale: tScales,
     hide?: boolean
 }
@@ -35,7 +36,7 @@ export type tPresets = {
  */
 
 
-export const scaleGen = (count = 5, interval = 7, shift = 0) => {
+const scaleGen = (count = 5, interval = 7, shift = 0) => {
 
     shift = shift > 0 ? (shift % 12) : 12 + (shift % 12)
 
@@ -49,32 +50,31 @@ export const scaleGen = (count = 5, interval = 7, shift = 0) => {
     base = _base.concat(base);
     return base;
 },
-    mix = (...args: number[][]) => {
-        var result: number[] = [];
-        return args.reduce((m, arr) => {
+    mix = (...args: number[][]) =>
+        args.reduce((m, arr) =>
             arr.reduce((m, v, j) => {
                 m[j] = m[j] | v
                 return m
-            }, m)
-            return m
-        }, result)
-    },
+            }, m), [])
+    ,
     swap = (scale: number[], notePosTuple: number[]) => {
         return scale.map((v, i) => {
             let ind = notePosTuple.indexOf(i)
             return ind == -1 ? v : scale[notePosTuple[ind ? 0 : 1]]
         });
-    },
-    commonScales = {
-        MajorPentatonic: scaleGen(5),
-        MinorPentatonic: scaleGen(5, 7, -3),
-        Pythag: scaleGen(7),
-        Major: scaleGen(7, 7, 7),
-        NaturalMinor: scaleGen(7, 7, 4),
-        Dorian: scaleGen(7, 7, -3),
-        Mixolydian: scaleGen(7, 7, 2),
-        HarmonicMinor: swap(scaleGen(7, 7, 4), [11, 10])
-    },
+    }
+
+
+export const commonScales = {
+    MajorPentatonic: scaleGen(5),
+    MinorPentatonic: scaleGen(5, 7, -3),
+    Pythag: scaleGen(7),
+    Major: scaleGen(7, 7, 7),
+    NaturalMinor: scaleGen(7, 7, 4),
+    Dorian: scaleGen(7, 7, -3),
+    Mixolydian: scaleGen(7, 7, 2),
+    HarmonicMinor: swap(scaleGen(7, 7, 4), [11, 10])
+},
     tunings = {
         Standard: [5, 10, 15, 19, 24],
         Dropped: [7, 12, 17, 21, 26],
@@ -85,4 +85,3 @@ export const scaleGen = (count = 5, interval = 7, shift = 0) => {
         Equal2: [2, 4, 6, 8, 10],
 
     }
-export let offset = 10

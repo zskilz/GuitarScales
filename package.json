@@ -1,12 +1,9 @@
 {
   "name": "guitar-scales",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "An interactive guitar neck.",
   "author": "Zeroskilz <zskilz@gmail.com>",
-  "bin": {
-    "module-name": "./bin/GuitarScales.js"
-  },  
-  "main": "app/index.html",
+  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/zskilz/GuitarScales"
@@ -15,6 +12,12 @@
     "url": "https://github.com/zskilz/GuitarScales/issues"
   },
   "private": true,
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^16.10.2"
+  },
+  "scripts": {
+    "build": "tsc -b app devserver",
+    "start": "node index.js"
+  }
 }
-  

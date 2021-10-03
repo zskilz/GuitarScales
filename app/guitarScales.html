@@ -1,0 +1,70 @@
+<template>
+  <style>
+    .theCanvas {
+      /*position: relative;*/
+      border: black 1px solid;
+      margin: 3px;
+      display: block;
+    }
+
+    .scaleCntrl {
+      display: inline-block;
+      border: black 1px solid;
+      margin: 2px;
+      padding: 2px;
+    }
+  </style>
+  <header>
+    <h1>Guitar scales</h1>
+  </header>
+
+  Presets:
+
+  <slot name="presets"></slot>
+
+  <!-- <span repeat="(presetName,preset) in presets">
+    <button click="setScales(preset)">{{presetName}}</button>
+  </span> -->
+  <hr />
+  <span>
+    <button click="addScale()" disabled="currentScales.length>=4">Add Scale</button>
+    Transpose:
+    <button click="transpose(1)">+</button>
+    <button click="transpose(-1)">-</button>
+  </span>
+  <div>
+    <div class="scaleCntrl" repeat="s in currentScales">
+
+      <!-- <div style="color: {{scaleColors[currentScales.indexOf(s)]}}">BaseNote/Key/Root: -->
+      <div>BaseNote/Key/Root:
+        <select model="s.baseNote" options="noteName as noteName for noteName in noteNames"></select>
+      </div>
+      <div>Scale:
+        <select model="s.scale" options="sc as sc for (sc,intvls) in scales"></select>
+
+      </div>
+      <span><button click="removeScale(s)">Remove</button><button
+          click="s.hide=!s.hide">?{s.hide?"Show":"Hide"}</button></span>
+
+    </div>
+  </div>
+
+
+  <div>Handedness:
+    <select model="handedness">
+      <option>right</option>
+      <option>left</option>
+    </select>
+  </div>
+  <div>Tuning:
+    <select model="tuning" options="tunings"></select>
+  </div>
+  <div>Tuning Base Note:
+    <select model="tuningBase" options="noteNames"></select>
+  </div>
+  <button click="flip=!flip">Flip</button>
+  <canvas class="theCanvas"></canvas>
+  <footer>
+    <p>&copy; Copyright by Petrus J. Pretorius. All rights reserved.</p>
+  </footer>
+</template>

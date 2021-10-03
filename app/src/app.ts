@@ -47,9 +47,9 @@ export const App = (canvas: HTMLCanvasElement) => {
         }
 
 
-        , neck = neckDrawer(canvas, currentScales, settings)
+        , neck = neckDrawer(canvas)
         , updateScales = () => {
-            neck.draw();
+            neck(currentScales, settings);
         }
 
     return {
