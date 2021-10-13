@@ -18,6 +18,7 @@
   },
   "scripts": {
     "build": "tsc -b app devserver",
+    "dev": "tsc -b app devserver -w",
     "start": "node index.js"
   }
 }

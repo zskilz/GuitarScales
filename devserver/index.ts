@@ -2,6 +2,8 @@ import http from 'http';
 import fs from 'fs';
 import path from 'path';
 
+// Basic development server - just serves static files with cache disabled.
+
 let defaultPath = './app'
 let port = 8080
 
@@ -32,7 +34,7 @@ http.createServer((request, response) => {
         (request.url == '/') ? 'index.html' : request.url as string
     );
 
-    console.log(`req: ${request.url}, host: ${request.headers.host}, origin: ${request.headers.origin} ,resolving ${filePath}`);
+    console.log(`req: ${request.url}, host: ${request.headers.host} ,resolving ${filePath}`);
 
     let extname = String(path.extname(filePath)).toLowerCase();
 

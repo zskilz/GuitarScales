@@ -1,19 +1,20 @@
-import { commonScales, noteNames, tPreset, tScale, tSettings, tunings } from "./musicHelpers.js";
-
+import { tSettings } from "./app.js";
+import { commonScales, noteNames, tNoteNames, tPreset, tScale, tTunings, tunings } from "./musicHelpers.js";
 
 /**
-       *
-       * Draws a 6-string guitar's fretboard with musical scales highlighted.
-       *
-       * e: a element to contain canvas.
-       * scale: Array of 12 binary ints(1 or 0), denotes a which notes are present in the musical scale
-       * tuning: Array of 5 values denoting the offset from the tuningBase. excludes the tuningBase
-       * handedness: String, 'right' or 'left'. Denotes how the guitar is strung. Lefthanded or Righthanded.
-       * baseNote: int, a offset for SciNotes Array... 'A' through 'G#', denoting musical key or root.
-       * tuningBase: int, as baseNote, denotes note the guitar's fattest string is tuned to. Default is 'E'
-       * flip: boolean, weither to turn around the fretboard image.
-       */
-export const neckDrawer = (e: HTMLCanvasElement) => {
+ * Neck Drawing Function Type
+ * @param scales Array of 12 binary ints(1 or 0), denotes a which notes are present in the musical scale
+ * @param settings Settings of type : {@link tSettings}
+ */
+type tDrawneck =
+    (scales: tPreset, settings: tSettings) => void
+
+/**
+ * Constructs a drawer function
+ * @param e Canvas Element
+ * @returns draw function of type: {@link tDrawneck}
+ */
+export const neckDrawer = (e: HTMLCanvasElement): tDrawneck => {
 
     let w = 540,
         h = 100,
@@ -53,13 +54,13 @@ export const neckDrawer = (e: HTMLCanvasElement) => {
 
                 y = h * r
                 if ((5 - i) > 0) {
-                    t = tunings[settings.tuning][(5 - i) - 1]
+                    t = tunings[settings.tuning as tTunings][(5 - i) - 1]
                 }
                 else {
                     t = 0;
                 }
                 for (let n, x, j = 0; j < 18; j++) {
-                    n = (j + t - noteNames.indexOf(scale.baseNote) + noteNames.indexOf(settings.tuningBase)) % 12;
+                    n = (j + t - noteNames.indexOf(scale.baseNote) + noteNames.indexOf(settings.tuningBase as tNoteNames)) % 12;
                     n = (n < 0 ? 12 + n : n);
                     if (commonScales[scale.scale][n]) {
                         x = max * l - Math.pow(2, ((18 - j) / 12)) * l;
@@ -75,6 +76,10 @@ export const neckDrawer = (e: HTMLCanvasElement) => {
         scaleColors = ['rgba(0,0,0,0.5)', 'rgba(200,0,0,0.5)', 'rgba(0,200,0,0.5)', 'rgba(0,0,200,0.5)']
 
     return (scales: tPreset, settings: tSettings) => {
+        cnxt.fillStyle = 'white'
+        cnxt.clearRect(0, 0, e.width, e.height)
+        cnxt.resetTransform()
+
         if (settings.handedness != 'right') {
             cnxt.scale(1, -1)
             cnxt.translate(0, -(h + offset * 2))
@@ -83,6 +88,8 @@ export const neckDrawer = (e: HTMLCanvasElement) => {
             cnxt.scale(-1, -1)
             cnxt.translate(-(w + offset * 2), -(h + offset * 2))
         }
+
+        cnxt.fillStyle = 'black'
 
         _drawFrets()
         _drawStrings()
@@ -93,3 +100,5 @@ export const neckDrawer = (e: HTMLCanvasElement) => {
         })
     }
 }
+
+

@@ -20,23 +20,22 @@
 
   Presets:
 
-  <slot name="presets"></slot>
+  <!-- <slot name="presets"></slot> -->
 
-  <!-- <span repeat="(presetName,preset) in presets">
-    <button click="setScales(preset)">{{presetName}}</button>
-  </span> -->
-  <hr />
+  <z-repeat over="presets">
+    <button click="setScale">${Ind}</button>
+  </z-repeat>
+  <!-- <hr /> -->
   <span>
-    <button click="addScale()" disabled="currentScales.length>=4">Add Scale</button>
+    <!-- <button click="addScale()" disabled="currentScales.length>=4">Add Scale</button> -->
     Transpose:
     <button click="transpose(1)">+</button>
     <button click="transpose(-1)">-</button>
   </span>
-  <div>
-    <div class="scaleCntrl" repeat="s in currentScales">
+  <!-- <div class="scaleCntrl" z-repeat="s in currentScales"> -->
 
-      <!-- <div style="color: {{scaleColors[currentScales.indexOf(s)]}}">BaseNote/Key/Root: -->
-      <div>BaseNote/Key/Root:
+  <!-- <div style="color: {{scaleColors[currentScales.indexOf(s)]}}">BaseNote/Key/Root: -->
+  <!-- <div>BaseNote/Key/Root:
         <select model="s.baseNote" options="noteName as noteName for noteName in noteNames"></select>
       </div>
       <div>Scale:
@@ -44,25 +43,35 @@
 
       </div>
       <span><button click="removeScale(s)">Remove</button><button
-          click="s.hide=!s.hide">?{s.hide?"Show":"Hide"}</button></span>
+          click="s.hide=!s.hide">?{s.hide?"Show":"Hide"}</button></span> -->
 
+  <!-- </div> -->
+  <div class="scaleCntrl">
+    <z-repeat over="currentScales">
+      <div zstyle="currentColor">
+        BaseNote/Key/Root:
+        <select model="baseNote" options="noteNames"></select>
+      </div>
+      <div>Scale:
+        <select model="scale" options="commonScales"></select>
+
+      </div>
+      <span><button click="removeScale">Remove</button><button click="hide">${btnHide}</button></span>
+    </z-repeat>
+  </div>
+
+  <div class="settings">
+    <div>Handedness:
+      <select model="handedness" options="handedness"></select>
     </div>
+    <div>Tuning:
+      <select model="tuning" options="tunings"></select>
+    </div>
+    <div>Tuning Base Note:
+      <select model="tuningBase" options="noteNames"></select>
+    </div>
+    <button click="flip">Flip</button>
   </div>
-
-
-  <div>Handedness:
-    <select model="handedness">
-      <option>right</option>
-      <option>left</option>
-    </select>
-  </div>
-  <div>Tuning:
-    <select model="tuning" options="tunings"></select>
-  </div>
-  <div>Tuning Base Note:
-    <select model="tuningBase" options="noteNames"></select>
-  </div>
-  <button click="flip=!flip">Flip</button>
   <canvas class="theCanvas"></canvas>
   <footer>
     <p>&copy; Copyright by Petrus J. Pretorius. All rights reserved.</p>
